@@ -21,12 +21,11 @@ const forecast = (lat,lon,callback)=>{
        
        else{
 
-         let data = {
-             lat:response.body.location.lat,
-             lon:response.body.location.lon
+        
+        callback(undefined,"The current temperature is "+response.body.current.temperature)  
          }
-        callback('connection is ok and the long and lat is ',data)
-       }
+        
+       
 
     })
 

@@ -2,76 +2,46 @@ const geocode =  require('./utils/geocode')
 const forecast = require('./utils/forecast')
 
 
-
-/*
-//const url = 'http://api.weatherstack.com/current?access_key=18267a09c3cb008fe493ddc699fa29ca&query=37.8267,-122.4233&units=f';
-const url = 'http://api.weatherstack.com/current?access_key=18267a09c3cb008fe493ddc699fa29ca&query=31117.8267,-122.4233&units=f';
+const address = process.argv[2]
 
 
-request({ url:url, json: true}, (error,response) =>{
-//as we have turned json as true
+  if (!address){
 
-if(error){
+    console.log("Please provide an address and try again")
+  }else{
 
-    console.log("unable to connect to the internet");
-}
-else if(response.body.error){
-    console.log("location not found")
-}
-else{
-const data = JSON.parse(response)
-console.log(response.body.current.temperature)
-}
-})
-
-*/
+    geocode(address, (error,data)=>{
 
 
-/*
-const urlmap = 'https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20Angeles.json?access_token=pk.eyJ1IjoieW91c3VmMTIzMTIzIiwiYSI6ImNrY3oyNnN2ZzBmc3oyc3FpNDFqenMxaDQifQ.49MVEKbbUkDjTxGeZhAiKQ'
-const testing = 'https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20fuckyou.json?access_token=pk.eyJ1IjoieW91c3VmMTIzMTIzIiwiYSI6ImNrY3oyNnN2ZzBmc3oyc3FpNDFqenMxaDQifQ.49MVEKbbUkDjTxGeZhAiKQ'
+        console.log(error)
+        console.log(data)
 
-request({ url:urlmap , json: true}, (error,response) =>{
-    //as we have turned json as true
-    
-    if(error){
 
-     console.log("Unable to connect to the internet")
-    }
+        forecast(data.latitude, data.longitude, (error, forecastData) => {
 
-    else if(response.body.features[0] == undefined){
+           if (error){
 
-      console.log("not found")
-    }
+               return console.log(error)
+           }
+           console.log(data.location)
+           console.log(forecastData)
+         })
+
+   })
+
+
+  }
+
+   
     
     
-  else{
-    console.log(response.body.features[0].center[0])
-    console.log(response.body.features[0].center[1])
-}
     
-    })
-    */
+    
+
+    
 
 
 
 
-   /*
-    geocode('Philadelphia', (error,data)=>{
-
-
-         console.log(error)
-         console.log(data)
-
-    })
-
-    */
-
-
-
-forecast(-75.7088, 44.1545, (error, data) => {
-    console.log('Error', error)
-    console.log('Data', data)
-  })
 
 
