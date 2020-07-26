@@ -1,4 +1,6 @@
-const request = require('request')
+const geocode =  require('./utils/geocode')
+const forecast = require('./utils/forecast')
+
 
 
 /*
@@ -25,11 +27,11 @@ console.log(response.body.current.temperature)
 */
 
 
-
-//const urlmap = 'https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20Angeles.json?access_token=pk.eyJ1IjoieW91c3VmMTIzMTIzIiwiYSI6ImNrY3oyNnN2ZzBmc3oyc3FpNDFqenMxaDQifQ.49MVEKbbUkDjTxGeZhAiKQ'
+/*
+const urlmap = 'https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20Angeles.json?access_token=pk.eyJ1IjoieW91c3VmMTIzMTIzIiwiYSI6ImNrY3oyNnN2ZzBmc3oyc3FpNDFqenMxaDQifQ.49MVEKbbUkDjTxGeZhAiKQ'
 const testing = 'https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20fuckyou.json?access_token=pk.eyJ1IjoieW91c3VmMTIzMTIzIiwiYSI6ImNrY3oyNnN2ZzBmc3oyc3FpNDFqenMxaDQifQ.49MVEKbbUkDjTxGeZhAiKQ'
 
-request({ url:testing , json: true}, (error,response) =>{
+request({ url:urlmap , json: true}, (error,response) =>{
     //as we have turned json as true
     
     if(error){
@@ -49,4 +51,27 @@ request({ url:testing , json: true}, (error,response) =>{
 }
     
     })
-    
+    */
+
+
+
+
+   /*
+    geocode('Philadelphia', (error,data)=>{
+
+
+         console.log(error)
+         console.log(data)
+
+    })
+
+    */
+
+
+
+forecast(-75.7088, 44.1545, (error, data) => {
+    console.log('Error', error)
+    console.log('Data', data)
+  })
+
+
