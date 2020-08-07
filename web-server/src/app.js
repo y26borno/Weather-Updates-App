@@ -24,7 +24,7 @@ app.get('/', (req,res)=>{
 
     res.render('index', {
 
-      title:'index Page in hbs',
+      title:'Weather',
       footer:"This is footer"
 
     })
@@ -34,7 +34,7 @@ app.get('/about', (req,res)=>{
 
     res.render('about', {
  
-      title:'About Page in hbs',
+      title:'About',
       footer:"This is footer"
 
     })
@@ -45,24 +45,42 @@ app.get('/help', (req,res)=>{
 
     res.render('help', {
  
-      title:'About help in hbs',
+      title:'Help',
       footer:"This is footer"
 
     })
 })
 
-app.get('*',(req,res)=>{
+app.get('/help/*',(req,res)=>{
 
-    res.send("Not Found 404")
+    res.render('error',{
+
+        helpError:"No help found"
+    })
 })
 
 
-app.listen(9000, (req,res)=>{
+
+
+
+
+app.get('*',(req,res)=>{
+
+    res.render('error',{
+        title:"404",
+        error:"Not Found 404"
+    })
+})
+
+app.listen(2000, (req,res)=>{
 
 
     
     console.log("server is ready")
 })
+
+
+
 
 
 console.log(__dirname)
