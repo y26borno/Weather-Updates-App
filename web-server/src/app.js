@@ -1,6 +1,8 @@
 const express = require('express')
 const path = require('path')
 const hbs = require('hbs')
+const geocode =  require('./utils/geocode')
+const forecast = require('./utils/forecast')
 
 
 const app = express()
@@ -49,6 +51,75 @@ app.get('/help', (req,res)=>{
       footer:"This is footer"
 
     })
+})
+
+app.get('/weather', (req,res)=>{
+
+    if(!req.query.address){
+
+              return res.send({
+
+                   error:"Address must be mentioned"
+              })
+    }
+
+    console.log(req.query.address)
+
+
+    geocode(req.query.address, (error,data)=>{
+
+
+        if(error){
+
+            return res.send({error})
+        }
+
+        const latitude = data.latitude
+        const longitude = data.longitude
+        const location = data.location
+
+        console.log("lat:"+latitude+ ", long: "+longitude+" location:"+location)
+
+        forecast(location, longitude, (error, forecastData) => {
+
+           if (error){
+
+               return res.send({error})
+           }
+
+           res.send({
+            forcast:forecastData,
+            location:data.location,
+            address: req.query.address
+        })
+           
+         })
+
+   })
+
+    
+
+})
+
+
+app.get('/products', (req,res)=>{
+
+    if(!req.query.search){
+
+             res.send({
+
+                error:'You must provide'
+             })
+    }else {
+
+
+    console.log(req.query.name)
+    res.send({
+
+      products:[{prodId:420}]
+    })
+
+}
 })
 
 app.get('/help/*',(req,res)=>{
