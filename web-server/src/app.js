@@ -7,6 +7,8 @@ const forecast = require('./utils/forecast')
 
 const app = express()
 
+const port = process.env.PORT || 2000
+
 //Define paths for Express config
 const publicDirectory = path.join(__dirname,'../public');
 const viewDirectory = path.join(__dirname,'../templates/views')
@@ -143,11 +145,11 @@ app.get('*',(req,res)=>{
     })
 })
 
-app.listen(2000, (req,res)=>{
+app.listen(port, (req,res)=>{
 
 
     
-    console.log("server is ready")
+    console.log("server is ready at"+ port)
 })
 
 
